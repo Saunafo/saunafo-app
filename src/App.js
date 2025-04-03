@@ -1,7 +1,7 @@
 // App with booking slots per sauna
 import React, { useState } from "react";
 import { Button } from "./components/ui/button";
-import { Card, CardContent } from "./components/ui/card";
+import { Card, CardContent } from "../components/ui/card";
 import { Input } from "./components/ui/input";
 import { Label } from "./components/ui/label";
 import { Calendar } from "./components/ui/calendar";
@@ -113,42 +113,42 @@ export default function SaunaApp() {
 const saunas = [
   {
     name: "Tróndur",
-    image: "https://images.unsplash.com/photo-1573981902884-1cdbd7ba3b27?auto=format&fit=crop&w=800&q=80",
+    image: "/images/sauna1.jpg",
     description: "Strong and solitary on the rocks.",
     location: "Gjógv, North Eysturoy",
     price: 450
   },
   {
     name: "Huld",
-    image: "https://images.unsplash.com/photo-1608178398319-48e78af49400?auto=format&fit=crop&w=800&q=80",
+    image: "/images/sauna2.jpg",
     description: "Hidden in mist and mystery.",
     location: "Funningur Valley",
     price: 390
   },
   {
     name: "Sólja",
-    image: "https://images.unsplash.com/photo-1616627980381-8fd4d1e582d4?auto=format&fit=crop&w=800&q=80",
+    image: "/images/sauna3.jpg",
     description: "Calm, light, and blooming.",
     location: "Leirvík Hills",
     price: 420
   },
   {
     name: "Eldur",
-    image: "https://images.unsplash.com/photo-1601965202941-0305f7d4e3f7?auto=format&fit=crop&w=800&q=80",
+    image: "/images/sauna4.jpg",
     description: "Fierce and fiery core heat.",
     location: "Sundini Peninsula",
     price: 480
   },
   {
     name: "Skavi",
-    image: "https://images.unsplash.com/photo-1574787405559-207d43ff6a64?auto=format&fit=crop&w=800&q=80",
+    image: "/images/sauna5.jpg",
     description: "Highland winds and chill.",
     location: "Viðareiði Ridge",
     price: 400
   },
   {
     name: "Nólsoy Flame",
-    image: "https://images.unsplash.com/photo-1598188306457-1dff78f86e2b?auto=format&fit=crop&w=800&q=80",
+    image: "/images/sauna6.jpg",
     description: "Maritime strength and sea dips.",
     location: "Nólsoy Island",
     price: 430
