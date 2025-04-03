@@ -111,10 +111,46 @@ export default function SaunaApp() {
 }
 
 const saunas = [
-  { name: "Tróndur", image: "https://source.unsplash.com/400x200/?viking,sauna", description: "Strong and solitary on the rocks.", location: "Gjógv, North Eysturoy", price: 450 },
-  { name: "Huld", image: "https://source.unsplash.com/400x200/?foggy,forest", description: "Hidden in mist and mystery.", location: "Funningur Valley", price: 390 },
-  { name: "Sólja", image: "https://source.unsplash.com/400x200/?meadow,nature", description: "Calm, light, and blooming.", location: "Leirvík Hills", price: 420 },
-  { name: "Eldur", image: "https://source.unsplash.com/400x200/?fire,heat", description: "Fierce and fiery core heat.", location: "Sundini Peninsula", price: 480 },
-  { name: "Skavi", image: "https://source.unsplash.com/400x200/?windy,cliffs", description: "Highland winds and chill.", location: "Viðareiði Ridge", price: 400 },
-  { name: "Nólsoy Flame", image: "https://source.unsplash.com/400x200/?coastline,sea", description: "Maritime strength and sea dips.", location: "Nólsoy Island", price: 430 }
+  {
+    name: "Tróndur",
+    image: "https://images.unsplash.com/photo-1573981902884-1cdbd7ba3b27?auto=format&fit=crop&w=800&q=80",
+    description: "Strong and solitary on the rocks.",
+    location: "Gjógv, North Eysturoy",
+    price: 450
+  },
+  {
+    name: "Huld",
+    image: "https://images.unsplash.com/photo-1608178398319-48e78af49400?auto=format&fit=crop&w=800&q=80",
+    description: "Hidden in mist and mystery.",
+    location: "Funningur Valley",
+    price: 390
+  },
+  {
+    name: "Sólja",
+    image: "https://images.unsplash.com/photo-1616627980381-8fd4d1e582d4?auto=format&fit=crop&w=800&q=80",
+    description: "Calm, light, and blooming.",
+    location: "Leirvík Hills",
+    price: 420
+  },
+  {
+    name: "Eldur",
+    image: "https://images.unsplash.com/photo-1601965202941-0305f7d4e3f7?auto=format&fit=crop&w=800&q=80",
+    description: "Fierce and fiery core heat.",
+    location: "Sundini Peninsula",
+    price: 480
+  },
+  {
+    name: "Skavi",
+    image: "https://images.unsplash.com/photo-1574787405559-207d43ff6a64?auto=format&fit=crop&w=800&q=80",
+    description: "Highland winds and chill.",
+    location: "Viðareiði Ridge",
+    price: 400
+  },
+  {
+    name: "Nólsoy Flame",
+    image: "https://images.unsplash.com/photo-1598188306457-1dff78f86e2b?auto=format&fit=crop&w=800&q=80",
+    description: "Maritime strength and sea dips.",
+    location: "Nólsoy Island",
+    price: 430
+  }
 ];
