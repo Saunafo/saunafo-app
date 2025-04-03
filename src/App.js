@@ -1,12 +1,13 @@
 // Extended with details modal + locations
 import React, { useState } from "react";
-import { Button } from "../components/ui/button";
-import { Card, CardContent } from "../components/ui/card";
-import { Input } from "../components/ui/input";
-import { Label } from "../components/ui/label";
-import { Calendar } from "../components/ui/calendar";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
+import { Button } from "./components/ui/button";
+import { Card, CardContent } from "./components/ui/card";
+import { Input } from "./components/ui/input";
+import { Label } from "./components/ui/label";
+import { Calendar } from "./components/ui/calendar";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
 
+// Your sauna list...
 const saunas = [
   { name: "Tróndur", image: "https://source.unsplash.com/400x200/?viking,sauna", description: "Strong and solitary on the rocks.", location: "Gjógv, North Eysturoy" },
   { name: "Huld", image: "https://source.unsplash.com/400x200/?foggy,forest", description: "Hidden in mist and mystery.", location: "Funningur Valley" },
@@ -17,8 +18,6 @@ const saunas = [
 ];
 
 export default function SaunaApp() {
-// rest of your component stays unchanged...
-
   const [sessionStarted, setSessionStarted] = useState(false);
   const [temp, setTemp] = useState(70);
   const [code, setCode] = useState("");
