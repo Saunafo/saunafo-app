@@ -1,7 +1,7 @@
 // App with booking slots per sauna
 import React, { useState } from "react";
 import { Button } from "./components/ui/button";
-import { Card, CardContent } from "../components/ui/card";
+import { Card, CardContent } from "./components/ui/card";
 import { Input } from "./components/ui/input";
 import { Label } from "./components/ui/label";
 import { Calendar } from "./components/ui/calendar";
