@@ -1,11 +1,11 @@
 // App with booking slots per sauna
 import React, { useState } from "react";
-import { Button } from "../components/ui/button";
-import { Card, CardContent } from "../components/ui/card";
-import { Input } from "../components/ui/input";
-import { Label } from "../components/ui/label";
-import { Calendar } from "../components/ui/calendar";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
+import { Button } from "./components/ui/button";
+import { Card, CardContent } from "./components/ui/card";
+import { Input } from "./components/ui/input";
+import { Label } from "./components/ui/label";
+import { Calendar } from "./components/ui/calendar";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
 
 export default function SaunaApp() {
   const [selectedSauna, setSelectedSauna] = useState(null);
