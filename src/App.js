@@ -113,42 +113,42 @@ export default function SaunaApp() {
 const saunas = [
   {
     name: "Tróndur",
-    image: "/images/sauna1.jpg",
+    image: "/public-images-folder/sauna_4.webp",
     description: "Strong and solitary on the rocks.",
     location: "Gjógv, North Eysturoy",
     price: 450
   },
   {
     name: "Huld",
-    image: "/images/sauna2.jpg",
+    image: "/public-images-folder/sauna_1.jpeg",
     description: "Hidden in mist and mystery.",
     location: "Funningur Valley",
     price: 390
   },
   {
     name: "Sólja",
-    image: "/images/sauna3.jpg",
+    image: "/public-images-folder/sauna_5.webp",
     description: "Calm, light, and blooming.",
     location: "Leirvík Hills",
     price: 420
   },
   {
     name: "Eldur",
-    image: "/images/sauna4.jpg",
+    image: "/public-images-folder/sauna_3.webp",
     description: "Fierce and fiery core heat.",
     location: "Sundini Peninsula",
     price: 480
   },
   {
     name: "Skavi",
-    image: "/images/sauna5.jpg",
+    image: "/public-images-folder/sauna_6.webp",
     description: "Highland winds and chill.",
     location: "Viðareiði Ridge",
     price: 400
   },
   {
     name: "Nólsoy Flame",
-    image: "/images/sauna6.jpg",
+    image: "/public-images-folder/sauna_2.jpeg",
     description: "Maritime strength and sea dips.",
     location: "Nólsoy Island",
     price: 430
