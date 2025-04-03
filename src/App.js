@@ -1,138 +1,120 @@
-// Extended with details modal + locations
+// App with booking slots per sauna
 import React, { useState } from "react";
-import { Button } from "./components/ui/button";
-import { Card, CardContent } from "./components/ui/card";
-import { Input } from "./components/ui/input";
-import { Label } from "./components/ui/label";
-import { Calendar } from "./components/ui/calendar";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
-
-// Your sauna list...
-const saunas = [
-  { name: "Tróndur", image: "https://source.unsplash.com/400x200/?viking,sauna", description: "Strong and solitary on the rocks.", location: "Gjógv, North Eysturoy" },
-  { name: "Huld", image: "https://source.unsplash.com/400x200/?foggy,forest", description: "Hidden in mist and mystery.", location: "Funningur Valley" },
-  { name: "Sólja", image: "https://source.unsplash.com/400x200/?meadow,nature", description: "Calm, light, and blooming.", location: "Leirvík Hills" },
-  { name: "Eldur", image: "https://source.unsplash.com/400x200/?fire,heat", description: "Fierce and fiery core heat.", location: "Sundini Peninsula" },
-  { name: "Skavi", image: "https://source.unsplash.com/400x200/?windy,cliffs", description: "Highland winds and chill.", location: "Viðareiði Ridge" },
-  { name: "Nólsoy Flame", image: "https://source.unsplash.com/400x200/?coastline,sea", description: "Maritime strength and sea dips.", location: "Nólsoy Island" }
-];
+import { Button } from "../components/ui/button";
+import { Card, CardContent } from "../components/ui/card";
+import { Input } from "../components/ui/input";
+import { Label } from "../components/ui/label";
+import { Calendar } from "../components/ui/calendar";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
 
 export default function SaunaApp() {
-  const [sessionStarted, setSessionStarted] = useState(false);
-  const [temp, setTemp] = useState(70);
-  const [code, setCode] = useState("");
+  const [selectedSauna, setSelectedSauna] = useState(null);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedSauna, setSelectedSauna] = useState(saunas[0]);
-  const [user, setUser] = useState({ loggedIn: false, name: "" });
-  const [bookingHistory, setBookingHistory] = useState([]);
-  const [showDetails, setShowDetails] = useState(null);
+  const [selectedSlot, setSelectedSlot] = useState(null);
 
-  const handleUnlock = () => {
-    alert(`Sauna ${selectedSauna.name} unlocked with code: ` + code);
-  };
-
-  const handleStartSession = () => {
-    setSessionStarted(true);
-    alert(`Heating ${selectedSauna.name} sauna to ${temp}°C`);
-    setBookingHistory([...bookingHistory, { date: selectedDate, temp, sauna: selectedSauna.name }]);
-  };
-
-  const handleLogin = () => {
-    setUser({ loggedIn: true, name: "Guest User" });
-  };
+  const availableSlots = ["08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00"];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white font-serif p-6">
-      <h1 className="text-4xl font-bold mb-6 text-center tracking-wide uppercase text-yellow-300">sauna.fo</h1>
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white font-serif">
+      <header className="bg-gradient-to-r from-yellow-700 to-yellow-800 py-12 px-6 text-center shadow-xl">
+        <h1 className="text-5xl font-bold uppercase tracking-wider text-white mb-4">sauna.fo</h1>
+        <p className="text-xl text-yellow-100 italic max-w-2xl mx-auto">
+          Where fire meets fog. Experience the Viking sauna ritual across the Faroe Islands.
+        </p>
+        <Button className="mt-6 bg-white text-yellow-800 px-6 py-2 font-bold rounded shadow-lg hover:bg-yellow-200 transition">
+          Book Your Ritual
+        </Button>
+      </header>
 
-      {!user.loggedIn ? (
-        <Card className="mb-6 bg-gray-800 border-yellow-500 border shadow-xl rounded-xl">
-          <CardContent className="p-6">
-            <h2 className="text-2xl font-semibold mb-4 text-yellow-200">Log into the Sauna Realm</h2>
-            <Button className="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded" onClick={handleLogin}>Login as Guest</Button>
-          </CardContent>
-        </Card>
-      ) : (
-        <Tabs defaultValue="book" className="w-full">
-          <TabsList className="mb-6 flex justify-center space-x-4">
-            <TabsTrigger value="book" className="bg-gray-700 text-yellow-300 px-4 py-2 rounded-lg">Book Session</TabsTrigger>
-            <TabsTrigger value="history" className="bg-gray-700 text-yellow-300 px-4 py-2 rounded-lg">Session History</TabsTrigger>
-            <TabsTrigger value="admin" className="bg-gray-700 text-yellow-300 px-4 py-2 rounded-lg">Admin Dashboard</TabsTrigger>
-          </TabsList>
+      <section className="py-12 px-4 md:px-16">
+        <h2 className="text-3xl text-yellow-300 font-bold mb-8 text-center uppercase">Explore Our Saunas</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {saunas.map((sauna, index) => (
+            <Card
+              key={index}
+              className={`bg-gray-800 border ${
+                selectedSauna?.name === sauna.name ? "border-yellow-400" : "border-yellow-700"
+              } rounded-xl shadow-lg cursor-pointer`}
+              onClick={() => setSelectedSauna(sauna)}
+            >
+              <img src={sauna.image} alt={sauna.name} className="w-full h-48 object-cover rounded-t-xl" />
+              <CardContent className="p-4">
+                <h3 className="text-xl text-yellow-100 font-bold mb-1">{sauna.name}</h3>
+                <p className="text-sm text-gray-300 mb-1">{sauna.description}</p>
+                <p className="text-xs text-gray-400 italic">📍 {sauna.location}</p>
+                <p className="text-xs text-yellow-300 mt-1 font-semibold">Price: {sauna.price} DKK/hour</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
 
-          <TabsContent value="book">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              {saunas.map((sauna, idx) => (
-                <Card
-                  key={idx}
-                  className={`cursor-pointer bg-gray-800 border ${
-                    selectedSauna.name === sauna.name ? "border-yellow-600" : "border-gray-700"
-                  } shadow-md rounded-lg transition hover:border-yellow-500 relative`}
-                  onClick={() => setSelectedSauna(sauna)}
+        {selectedSauna && (
+          <div className="mt-12 bg-gray-800 border border-yellow-600 rounded-xl p-6 shadow-xl">
+            <h3 className="text-2xl text-yellow-300 font-bold mb-4">Book {selectedSauna.name}</h3>
+            <Label className="text-sm mb-2 block">Choose Date</Label>
+            <Calendar
+              mode="single"
+              selected={selectedDate}
+              onSelect={(date) => setSelectedDate(date)}
+              className="mb-4"
+            />
+            <Label className="text-sm mb-2 block">Available Slots</Label>
+            <div className="flex flex-wrap gap-3 mb-6">
+              {availableSlots.map((slot) => (
+                <Button
+                  key={slot}
+                  className={`px-4 py-2 rounded ${
+                    selectedSlot === slot ? "bg-yellow-600" : "bg-yellow-400 text-gray-900"
+                  }`}
+                  onClick={() => setSelectedSlot(slot)}
                 >
-                  <img src={sauna.image} alt={sauna.name} className="w-full h-40 object-cover rounded-t-lg" />
-                  <CardContent className="p-4">
-                    <h3 className="text-xl text-yellow-200 font-semibold">{sauna.name}</h3>
-                    <p className="text-gray-300 text-sm mb-1">{sauna.description}</p>
-                    <p className="text-gray-400 text-xs italic">📍 {sauna.location}</p>
-                    <Button
-                      className="mt-3 bg-yellow-700 hover:bg-yellow-800 text-white px-3 py-1 rounded"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setShowDetails(sauna);
-                      }}
-                    >
-                      View Details
-                    </Button>
-                  </CardContent>
-                </Card>
+                  {slot}
+                </Button>
               ))}
             </div>
+            <Button disabled={!selectedSlot} className="bg-yellow-700 text-white px-6 py-2 rounded">
+              Confirm Booking for {selectedSlot || "..."}
+            </Button>
+          </div>
+        )}
+      </section>
 
-            {showDetails && (
-              <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
-                <div className="bg-gray-900 border border-yellow-600 rounded-xl shadow-xl max-w-lg w-full p-6">
-                  <h2 className="text-2xl text-yellow-300 font-bold mb-2">{showDetails.name}</h2>
-                  <p className="text-gray-300 mb-2">{showDetails.description}</p>
-                  <p className="text-sm italic text-yellow-200">Location: {showDetails.location}</p>
-                  <img src={showDetails.image} alt={showDetails.name} className="w-full h-48 object-cover my-4 rounded" />
-                  <Button onClick={() => setShowDetails(null)} className="bg-yellow-700 text-white px-4 py-2 rounded">
-                    Close
-                  </Button>
-                </div>
-              </div>
-            )}
-          </TabsContent>
+      <section className="bg-yellow-50 py-12 px-6 text-gray-900 text-center">
+        <h2 className="text-3xl font-bold mb-4 uppercase">What Our Guests Say</h2>
+        <div className="max-w-3xl mx-auto space-y-6">
+          <blockquote className="text-lg italic border-l-4 border-yellow-700 pl-4 text-gray-700">
+            "The best sea dip and sauna I've had in my life. Magical fog, fire, and waves."<br />
+            <span className="block text-sm font-semibold mt-2">— Jónas from Klaksvík</span>
+          </blockquote>
+          <blockquote className="text-lg italic border-l-4 border-yellow-700 pl-4 text-gray-700">
+            "It felt like stepping into an ancient ritual. Absolutely loved it."
+            <span className="block text-sm font-semibold mt-2">— Rannvá, Tórshavn</span>
+          </blockquote>
+        </div>
+      </section>
 
-          <TabsContent value="history">
-            <Card className="mb-6 bg-gray-800 border border-yellow-600 shadow-lg rounded-xl">
-              <CardContent className="p-6">
-                <h2 className="text-xl font-semibold mb-4 text-yellow-100">Session History</h2>
-                {bookingHistory.length === 0 ? (
-                  <p className="text-gray-300">No sessions yet. Your saga begins now.</p>
-                ) : (
-                  <ul className="list-disc list-inside text-yellow-100">
-                    {bookingHistory.map((entry, index) => (
-                      <li key={index}>
-                        {entry.date.toDateString()} - {entry.temp}°C - {entry.sauna}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </CardContent>
-            </Card>
-          </TabsContent>
+      <section className="bg-yellow-100 py-12 px-6 text-gray-900 text-center">
+        <h2 className="text-3xl font-bold mb-4 uppercase">Become a Member</h2>
+        <p className="max-w-xl mx-auto mb-6">
+          Access unlimited heat, private booking, and priority during peak hours. Membership starts at 299 DKK/month.
+        </p>
+        <Button className="bg-yellow-700 text-white px-6 py-2 rounded-lg font-semibold hover:bg-yellow-800 transition">
+          Join the Saga
+        </Button>
+      </section>
 
-          <TabsContent value="admin">
-            <Card className="mb-6 bg-gray-800 border border-yellow-600 shadow-lg rounded-xl">
-              <CardContent className="p-6">
-                <h2 className="text-xl font-semibold mb-4 text-yellow-100">Admin Dashboard</h2>
-                <p className="text-gray-300">Manage bookings, view users, and control the sauna flame here.</p>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
-      )}
+      <footer className="bg-gray-900 text-center text-yellow-100 py-8">
+        <p>© 2025 sauna.fo — Crafted with steam and stone</p>
+      </footer>
     </div>
   );
 }
+
+const saunas = [
+  { name: "Tróndur", image: "https://source.unsplash.com/400x200/?viking,sauna", description: "Strong and solitary on the rocks.", location: "Gjógv, North Eysturoy", price: 450 },
+  { name: "Huld", image: "https://source.unsplash.com/400x200/?foggy,forest", description: "Hidden in mist and mystery.", location: "Funningur Valley", price: 390 },
+  { name: "Sólja", image: "https://source.unsplash.com/400x200/?meadow,nature", description: "Calm, light, and blooming.", location: "Leirvík Hills", price: 420 },
+  { name: "Eldur", image: "https://source.unsplash.com/400x200/?fire,heat", description: "Fierce and fiery core heat.", location: "Sundini Peninsula", price: 480 },
+  { name: "Skavi", image: "https://source.unsplash.com/400x200/?windy,cliffs", description: "Highland winds and chill.", location: "Viðareiði Ridge", price: 400 },
+  { name: "Nólsoy Flame", image: "https://source.unsplash.com/400x200/?coastline,sea", description: "Maritime strength and sea dips.", location: "Nólsoy Island", price: 430 }
+];
